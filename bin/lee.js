@@ -14,6 +14,12 @@ program
     });
 
 program
+    .command("rename")
+    .option("-d, --dir [bool]", "修改文件夹", false)
+    .option("--prefix [string]", "修改文件夹", "")
+    .action(cmd => require("../src/renameToIndex").run(cleanArgs(cmd)));
+
+program
     .command("test [value]")
     .description("inspect and modify the config")
     .option("-e, --edit", "open config with default editor")
