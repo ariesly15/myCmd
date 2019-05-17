@@ -27,5 +27,8 @@ module.exports = {
             "error",
             "always"
         ]
+    },
+    "globals": {
+        "signale": false
     }
 };

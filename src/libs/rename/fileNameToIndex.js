@@ -3,7 +3,7 @@ const path = require("path");
 const shelljs = require("shelljs");
 const inquirer = require("inquirer");
 const chalk = require("chalk");
-const { isFile } = require("../utils");
+const { isFile } = require("../../utils");
 
 module.exports = () => {
     const cwd = process.cwd();

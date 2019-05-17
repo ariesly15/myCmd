@@ -17,11 +17,13 @@
         "chalk": "^2.4.2",
         "commander": "^2.9.0",
         "envinfo": "^7.0.0",
+        "fs-extra": "^8.0.1",
         "inquirer": "^6.2.2",
         "lodash": "^4.17.11",
         "opentype.js": "^0.11.0",
         "ora": "^3.1.0",
-        "shelljs": "^0.8.3"
+        "shelljs": "^0.8.3",
+        "signale": "^1.4.0"
     },
     "devDependencies": {
         "eslint": "^5.14.1",
@@ -30,5 +32,8 @@
     "pre-commit": [
         "lint",
         "echo"
-    ]
+    ],
+    "signale": {
+        "displayTimestamp": true
+    }
 }

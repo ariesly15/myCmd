@@ -1,0 +1,16 @@
+{
+    "scripts": [
+        {
+            "dir": "/Users/aweleey/Public/",
+            "script": "node -v"
+        },
+        {
+            "dir": "/Users/aweleey/Public/",
+            "script": "chaika"
+        },
+        {
+            "dir": "/Users/aweleey/Public/",
+            "script": "nanachi"
+        }
+    ]
+}

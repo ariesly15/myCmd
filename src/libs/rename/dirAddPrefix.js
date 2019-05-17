@@ -3,7 +3,7 @@ const fs = require("fs");
 const shell = require("shelljs");
 const _ = require("lodash");
 const chalk = require("chalk");
-const { isDir } = require("../utils");
+const { isDir } = require("../../utils");
 
 module.exports = options => {
     const prefix = options.prefix || "";

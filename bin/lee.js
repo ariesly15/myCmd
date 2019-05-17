@@ -1,34 +1,27 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 
-const program = require("commander");
+const cli = require("commander");
 const chalk = require("chalk");
+const fse = require("fs-extra");
+const path = require("path");
+const signale = require("signale");
 
-program.version(require("../package").version).usage("<command> [options]");
+global.signale = signale;
 
-program
-    .command("font <urlOrTtfPath>")
-    .description("print fontFamily")
-    .action(cmd => {
-        require("../src/readFont").run(cmd);
-    });
+const cmdPath = path.join(__dirname, "..", "src", "commands");
 
-program
-    .command("rename")
-    .option("-d, --dir [bool]", "修改文件夹", false)
-    .option("--prefix [string]", "修改文件夹", "")
-    .action(cmd => require("../src/renameToIndex").run(cleanArgs(cmd)));
+// [Function] and
+// 通过遍历的形式设置 option
+// https://github.com/tj/commander.js/pull/140
+cli.Command.prototype.and = function(fn) {
+    fn.call(this, this);
+    return this;
+};
 
-program
-    .command("test [value]")
-    .description("inspect and modify the config")
-    .option("-e, --edit", "open config with default editor")
-    .action((value, cmd) => {
-        console.log("value:", value, "\ncmd:", cleanArgs(cmd));
-    });
+cli.version(require("../package").version).usage("<command> [options]");
 
-program
-    .command("info")
+cli.command("info")
     .description("print debugging information about your environment")
     .action(() => {
         console.log(chalk.bold("\nEnvironment Info:"));
@@ -49,30 +42,31 @@ program
             .then(console.log);
     });
 
+fse.readdirSync(cmdPath).forEach(file => {
+    if (file !== "index.js" && path.extname(file) === ".js") {
+        const cmdFile = require(path.join(cmdPath, file));
+
+        cli.command(cmdFile.cmd.name)
+            .usage(cmdFile.cmd.usage)
+            .description(cmdFile.cmd.description)
+            .and(function(cli) {
+                if (cmdFile.cmd.options) {
+                    cmdFile.cmd.options.forEach(function(option) {
+                        cli.option(option.pattern, option.desc, option.default);
+                    });
+                }
+            })
+            .action(function(options) {
+                cmdFile.exec(process.cwd(), options);
+            });
+    }
+});
+
 // output help information on unknown commands
-program.arguments("<command>").action(cmd => {
-    program.outputHelp();
+cli.arguments("<command>").action(cmd => {
+    cli.outputHelp();
     console.log("  " + chalk.red(`Unknown command ${chalk.red(cmd)}.`));
     console.log();
 });
 
-program.parse(process.argv);
-
-function camelize(str) {
-    return str.replace(/-(\w)/g, (_, c) => (c ? c.toUpperCase() : ""));
-}
-
-// commander passes the Command object itself as options,
-// extract only actual options into a fresh object.
-function cleanArgs(cmd) {
-    const args = {};
-    cmd.options.forEach(o => {
-        const key = camelize(o.long.replace(/^--/, ""));
-        // if an option is not present and Command has a method with the same name
-        // it should not be copied
-        if (typeof cmd[key] !== "function" && typeof cmd[key] !== "undefined") {
-            args[key] = cmd[key];
-        }
-    });
-    return args;
-}
+cli.parse(process.argv);
