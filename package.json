@@ -1,5 +1,5 @@
 {
-    "name": "lee",
+    "name": "lee-commands",
     "version": "1.0.3",
     "description": "玩转命令行开发",
     "main": "bin/lee.js",
