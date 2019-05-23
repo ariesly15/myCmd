@@ -51,7 +51,6 @@ module.exports = {
             }
         ];
         inquirer.prompt(questions).then(answer => {
-            log.warn(answer);
             const { name, usage, description } = answer;
             const tempStr = fse
                 .readFileSync(cmdTemplatePath)
@@ -60,6 +59,7 @@ module.exports = {
                 .replace(TEMP_USAGE, usage)
                 .replace(TEMP_DESC, description);
             fse.writeFileSync(path.join(cmdPath, `${name}.js`), tempStr);
+            log.complate("初始化完成");
         });
     }
 };
