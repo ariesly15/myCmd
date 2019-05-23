@@ -1,6 +1,6 @@
 {
     "name": "app",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "description": "玩转命令行开发",
     "main": "bin/lee.js",
     "scripts": {
