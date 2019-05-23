@@ -1,6 +1,6 @@
 {
     "name": "lee-commands",
-    "version": "1.0.3",
+    "version": "1.0.5",
     "description": "玩转命令行开发",
     "main": "bin/lee.js",
     "scripts": {
