@@ -21,7 +21,7 @@ module.exports = {
     },
     exec: () => {
         const cmdPath = path.join(__dirname, "..", "commands");
-        const cmdTemplatePath = path.join(__dirname, "..", "common", "template", "cmd.js");
+        const cmdTemplatePath = path.join(__dirname, "..", "template", "cmd.js");
         const questions = [
             {
                 type: "input",
@@ -59,7 +59,7 @@ module.exports = {
                 .replace(TEMP_USAGE, usage)
                 .replace(TEMP_DESC, description);
             fse.writeFileSync(path.join(cmdPath, `${name}.js`), tempStr);
-            log.complate("初始化完成");
+            log.complete("初始化完成");
         });
     }
 };
