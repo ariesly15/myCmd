@@ -56,8 +56,8 @@ fse.readdirSync(cmdPath).forEach(file => {
                     });
                 }
             })
-            .action(function(options) {
-                cmdFile.exec(process.cwd(), options);
+            .action(function(...args) {
+                cmdFile.exec(process.cwd(), ...args);
             });
     }
 });
