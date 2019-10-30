@@ -33,7 +33,7 @@ module.exports = {
      * 在JSX语法中，所有引号均为双引号，该设置在JSX中被自动忽略
      * default: false
      */
-    singleQuote: false,
+    singleQuote: true,
 
     /**
      * default: "as-needed"
@@ -43,7 +43,7 @@ module.exports = {
     /**
      * default: false
      */
-    jsxSingleQuote: false,
+    jsxSingleQuote: true,
 
     /**
      * 在任何可能的多行中输入尾逗号。
@@ -56,7 +56,7 @@ module.exports = {
 
     /**
      * 在对象字面量声明所使用的的花括号后（{）和前（}）输出空格
-     *      true  - Example: {   foo: bar  }
+     *      true  - Example: { foo: bar }
      *      false - Example: {foo: bar}
      * default: true
      */
