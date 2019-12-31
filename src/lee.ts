@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 
-import figlet from 'figlet';
+import * as figlet from 'figlet';
 figlet('aweleey', () => {});
 
 import commander from 'commander';
