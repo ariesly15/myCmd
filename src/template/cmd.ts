@@ -1,4 +1,4 @@
-const path = require("path");
+import * as path from 'path';
 
 const s = `commands${path.sep}${path.basename(__filename)}`;
 const log = signale.scope(s);

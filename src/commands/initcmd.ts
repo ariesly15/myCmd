@@ -1,13 +1,13 @@
-const path = require("path");
-const fse = require("fs-extra");
-const inquirer = require("inquirer");
+import * as path from 'path';
+import * as fse from 'fs-extra';
+import * as inquirer from 'inquirer';
 const { isFile } = require("../utils");
-const { TEMP_NAME, TEMP_USAGE, TEMP_DESC } = require("../common/const");
+import {TEMP_NAME, TEMP_USAGE, TEMP_DESC } from '../common/const';
 
 const s = `commands${path.sep}${path.basename(__filename)}`;
 const log = signale.scope(s);
 
-module.exports = {
+export default {
     cmd: {
         name: "initcmd",
         usage: "[Wath is usage ?]",
@@ -27,7 +27,7 @@ module.exports = {
                 type: "input",
                 name: "name",
                 message: "cmd name",
-                validate: input => {
+                validate: (input: string) => {
                     if (!input) {
                         return "Can't be empty";
                     }
@@ -50,7 +50,7 @@ module.exports = {
                 message: "cmd description"
             }
         ];
-        inquirer.prompt(questions).then(answer => {
+        inquirer.prompt(questions).then((answer: any) => {
             const { name, usage, description } = answer;
             const tempStr = fse
                 .readFileSync(cmdTemplatePath)

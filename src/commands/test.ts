@@ -1,4 +1,4 @@
-const path = require("path");
+import * as path from 'path';
 
 const s = `commands${path.sep}${path.basename(__filename)}`;
 const log = signale.scope(s);
@@ -15,7 +15,7 @@ module.exports = {
             }
         ]
     },
-    exec: (pwd, options) => {
+    exec: (pwd: string, options: any[]) => {
         log.star(pwd, options);
     }
 };

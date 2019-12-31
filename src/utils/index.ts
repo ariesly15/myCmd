@@ -1,6 +1,6 @@
-const fs = require("fs");
+import * as fs from 'fs';
 
-exports.isFile = filePath =>
+export const isFile = (filePath: string) =>
     fs.existsSync(filePath) && fs.statSync(filePath).isFile();
-exports.isDir = filePath =>
+export const isDir = (filePath: string) =>
     fs.existsSync(filePath) && fs.statSync(filePath).isDirectory();

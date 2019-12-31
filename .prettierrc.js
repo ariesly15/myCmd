@@ -33,7 +33,7 @@ module.exports = {
      * 在JSX语法中，所有引号均为双引号，该设置在JSX中被自动忽略
      * default: false
      */
-    singleQuote: false,
+    singleQuote: true,
 
     /**
      * default: "as-needed"
@@ -43,7 +43,7 @@ module.exports = {
     /**
      * default: false
      */
-    jsxSingleQuote: false,
+    jsxSingleQuote: true,
 
     /**
      * 在任何可能的多行中输入尾逗号。
@@ -56,7 +56,7 @@ module.exports = {
 
     /**
      * 在对象字面量声明所使用的的花括号后（{）和前（}）输出空格
-     *      true  - Example: {   foo: bar  }
+     *      true  - Example: { foo: bar }
      *      false - Example: {foo: bar}
      * default: true
      */
@@ -84,40 +84,6 @@ module.exports = {
     arrowParens: 'avoid',
 
     /**
-     * 只格式化某个文件的一部分；
-     * 这两个参数可以用于从指定起止偏移字符(单独指定开始或结束、两者同时指定、分别指定)格式化代码。
-     * 一下情况，范围将会扩展：
-     *   回退至包含选中语句的第一行的开始
-     *   向前直到选中语句的末尾
-     * 注意：这些参数不可以同 cursorOffset 共用；
-     * default: 0, Infinity
-     */
-    rangeStart: 0,
-    rangeEnd: Infinity,
-
-    /**
-     * 指定使用哪一种解析器。 docs: https://prettier.io/docs/en/options.html#parser
-     * default: None
-     */
-    // parser: "None",
-
-    /**
-     * Prettier可以严格按照按照文件顶部的一些特殊的注释格式化代码，这些注释
-     * 称为“require pragma”(必须杂注)。这在逐步格式化一些大型、未经格式化过的代码是十分有用的。
-     * 示例： https://prettier.io/docs/en/options.html#require-pragma
-     * default: false
-     */
-    requirePragma: false,
-
-    /**
-     * Prettier可以在文件的顶部插入一个 @format的特殊注释，以表明改文件已经被Prettier格式化过了。
-     * 在使用 --require-pragma 参数处理一连串的文件时这个功能将十分有用。如果文件顶部
-     * 已经有一个doclock，这个选项将新建一行注释，并打上@format标记。
-     * default: false
-     */
-    insertPragma: false,
-
-    /**
      * 默认情况下，Prettier会因为使用了一些折行敏感型的渲染器（如GitHub comment 和 BitBucket）而按照markdown文本样式进行折行，但在某些情况下，你可能只是希望这个文本在编译器或查看器中soft-wrapping（是当屏幕放不下时发生的软折行），所以这一参数允许设置为 " never "
      * 有效参数：
      *   always   - 当超出print width（上面有这个参数）时就折行
@@ -125,15 +91,5 @@ module.exports = {
      *   perserve - 按照文件原样折行 （v1.9.0+）
      * default: "preserve"
      */
-    proseWrap: 'preserve',
-
-    /**
-     * default: "css"
-     */
-    htmlWhitespaceSensitivity: 'css',
-
-    /**
-     * default: "auto"
-     */
-    endOfLine: 'auto'
+    proseWrap: 'preserve'
 };
