@@ -1,27 +1,14 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 
-import * as figlet from 'figlet';
-figlet('aweleey', () => {});
-
+// import figlet from 'figlet';
 import commander from 'commander';
 import chalk from 'chalk';
 import signale from 'signale';
 import * as fse from 'fs-extra';
 import * as path from 'path';
-// import pkg from '../package.json';
-const pkg = {
-    version: '1.2.3'
-}
 
-// declare const global: {
-//     signale: signale.Signale;
-//     abc: number;
-// };
-
-global.signale = signale;
-global.tx = 3;
-
+const log = signale.scope('[ lee ]');
 const cmdPath = path.join(__dirname, '..', 'src', 'commands');
 
 // [Function] and
@@ -31,7 +18,7 @@ commander.Command.prototype.and = function(fn) {
     fn.call(this, this);
     return this;
 };
-commander.version(pkg.version).usage('<command> [options]');
+commander.version(require('../package.json')).usage('<command> [options]');
 
 commander
     .command('info')
@@ -57,8 +44,8 @@ commander
 
 fse.readdirSync(cmdPath).forEach((file: string) => {
     if (file !== 'index.js' && /\.[jt]s/.test(path.extname(file))) {
-        const cmdFile = require(path.join(cmdPath, file));
-        console.log('cccccccccccc.>>>>>>>>>>>', cmdFile);
+        let cmdFile = require(path.join(cmdPath, file));
+        if (cmdFile.default) cmdFile = cmdFile.default;
         commander
             .command(cmdFile.cmd.name)
             .usage(cmdFile.cmd.usage)
@@ -79,9 +66,11 @@ fse.readdirSync(cmdPath).forEach((file: string) => {
 // output help information on unknown commands
 commander.arguments('<command>').action(cmd => {
     commander.outputHelp();
-    console.log('  ' + chalk.red(`Unknown command ${chalk.red(cmd)}.`));
-    console.log();
+    log.error(`\nUnknown command ${chalk.red(cmd)}.\n`);
 });
 
 commander.parse(process.argv);
-console.log('................ done');
+// figlet.text('lee', { font: 'Big Money-se' }, (err, data) => {
+//     if (!err) console.log(data);
+//     log.complete('................ done');
+// });

@@ -1,6 +1,7 @@
 import * as path from 'path';
 import * as fse from 'fs-extra';
 import * as inquirer from 'inquirer';
+import signale from 'signale';
 const { isFile } = require("../utils");
 import {TEMP_NAME, TEMP_USAGE, TEMP_DESC } from '../common/const';
 
@@ -21,7 +22,7 @@ export default {
     },
     exec: () => {
         const cmdPath = path.join(__dirname, "..", "commands");
-        const cmdTemplatePath = path.join(__dirname, "..", "template", "cmd.js");
+        const cmdTemplatePath = path.join(__dirname, "..", "template", "cmd.ts");
         const questions = [
             {
                 type: "input",
@@ -33,7 +34,7 @@ export default {
                     }
                     let exist = fse.readdirSync(cmdPath).some(item => {
                         if (isFile(path.join(cmdPath, item))) {
-                            return path.basename(item, ".js") == input;
+                            return path.basename(item, ".ts") == input;
                         }
                     });
                     return exist ? "The file already exists。" : true;
@@ -58,7 +59,7 @@ export default {
                 .replace(TEMP_NAME, name)
                 .replace(TEMP_USAGE, usage)
                 .replace(TEMP_DESC, description);
-            fse.writeFileSync(path.join(cmdPath, `${name}.js`), tempStr);
+            fse.writeFileSync(path.join(cmdPath, `${name}.ts`), tempStr);
             log.complete("初始化完成");
         });
     }
